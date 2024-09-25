@@ -311,8 +311,12 @@ abstract class StreamExecution(
 
       // While active, repeatedly attempt to run batches.
       sparkSessionForStream.withActive {
+        // this is handled by InsertAdaptiveSparkPlan.scala now.
+        // It will check if a plan has a streaming ancestor before inserting adaptive nodes
+
         // Adaptive execution can change num shuffle partitions, disallow
-        sparkSessionForStream.conf.set(SQLConf.ADAPTIVE_EXECUTION_ENABLED.key, "false")
+        // sparkSessionForStream.conf.set(SQLConf.ADAPTIVE_EXECUTION_ENABLED.key, "false")
+
         // Disable cost-based join optimization as we do not want stateful operations
         // to be rearranged
         sparkSessionForStream.conf.set(SQLConf.CBO_ENABLED.key, "false")

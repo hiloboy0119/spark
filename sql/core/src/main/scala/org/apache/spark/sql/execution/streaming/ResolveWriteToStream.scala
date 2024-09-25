@@ -43,10 +43,10 @@ object ResolveWriteToStream extends Rule[LogicalPlan] with SQLConfHelper {
     case s: WriteToStreamStatement =>
       val (resolvedCheckpointLocation, deleteCheckpointOnStop) = resolveCheckpointLocation(s)
 
-      if (conf.adaptiveExecutionEnabled) {
-        logWarning(log"${MDC(CONFIG, SQLConf.ADAPTIVE_EXECUTION_ENABLED.key)} " +
-          log"is not supported in streaming DataFrames/Datasets and will be disabled.")
-      }
+//      if (conf.adaptiveExecutionEnabled) {
+//        logWarning(log"${MDC(CONFIG, SQLConf.ADAPTIVE_EXECUTION_ENABLED.key)} " +
+//          log"is not supported in streaming DataFrames/Datasets and will be disabled.")
+//      }
 
       if (conf.isUnsupportedOperationCheckEnabled) {
         if (s.sink.isInstanceOf[SupportsWrite] && s.isContinuousTrigger) {
